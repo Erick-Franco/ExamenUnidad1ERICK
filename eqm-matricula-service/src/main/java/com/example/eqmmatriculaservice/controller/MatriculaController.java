@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/matriculas")
@@ -46,12 +47,8 @@ public class MatriculaController {
     @GetMapping("/{id}")
     public ResponseEntity<Matricula> obtenerMatriculaPorId(@PathVariable("id") Integer id) {
         try {
-            Matricula matricula = matriculaService.obtenerMatriculaPorId(id);
-            if (matricula != null) {
-                return new ResponseEntity<>(matricula, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+            Optional<Matricula> matricula = matriculaService.obtenerMatriculaPorId(id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
