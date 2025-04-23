@@ -8,6 +8,8 @@ public class EqmCursoServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EqmCursoServiceApplication.class, args);
+		System.out.println("INICIADO CORRECTAMENTE");
+
 	}
 
 }

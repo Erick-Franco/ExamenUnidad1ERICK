@@ -8,6 +8,8 @@ public class MsGatewayServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MsGatewayServerApplication.class, args);
+        System.out.println("INICIADO CORRECTAMENTE");
+
     }
 
 }

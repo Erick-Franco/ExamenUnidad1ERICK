@@ -10,6 +10,7 @@ public class MsConfigServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MsConfigServerApplication.class, args);
+        System.out.println("INICIADO CORRECTAMENTE");
     }
 
 }
