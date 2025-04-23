@@ -20,7 +20,7 @@ spring:
         - id: ms-curso-service
           uri: lb://ms-curso-service
           predicates:
-            - Path=/categoria/**, /producto/**
+            - Path=/cursos/**
 
         - id: ms-estudiante-service
           uri: lb://ms-estudiante-service
@@ -30,4 +30,4 @@ spring:
         - id: mms-matricula-service
           uri: lb://ms-matricula-service
           predicates:
-            - Path=/pedido/**
+            - Path=/matriculas/**
