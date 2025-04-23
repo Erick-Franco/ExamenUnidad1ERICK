@@ -10,6 +10,16 @@
         <module name="ms-registry-server" />
         <module name="ms-gateway-server" />
       </profile>
+      <profile name="Annotation profile for eqm-curso-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="eqm-curso-service" />
+      </profile>
       <profile name="Annotation profile for eqm-matricula-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -19,20 +29,13 @@
         </processorPath>
         <module name="eqm-matricula-service" />
         <module name="eqm-estudiante-service" />
-        <module name="eqm-curso-service" />
-      </profile>
-      <profile name="Annotation profile for ms-pedido" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="ms-cliente" />
-        <module name="ms-pedido" />
-        <module name="ms-catalogo" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ms-catalogo" target="17" />
+      <module name="ms-cliente" target="17" />
+      <module name="ms-pedido" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
