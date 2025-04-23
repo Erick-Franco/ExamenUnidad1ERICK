@@ -11,5 +11,7 @@ public interface CursoService {
     Curso obtenerPorId(Integer id);
     Curso actualizarCurso(Integer id, Curso curso);
     boolean eliminarCurso(Integer id);
+
+
 }
 
