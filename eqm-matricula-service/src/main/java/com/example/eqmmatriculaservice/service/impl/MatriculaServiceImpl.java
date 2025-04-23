@@ -3,6 +3,8 @@ package com.example.eqmmatriculaservice.service.impl;
 
 import com.example.eqmcursoservice.entity.Curso;
 import com.example.eqmcursoservice.repository.CursoRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.eqmestudianteservice.entity.Estudiante;
 import com.example.eqmestudianteservice.repository.EstudianteRepository;
 import com.example.eqmmatriculaservice.entity.Matricula;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("ALL")
 @Service
 public class MatriculaServiceImpl implements MatriculaService {
 
@@ -22,7 +25,6 @@ public class MatriculaServiceImpl implements MatriculaService {
 
     @Autowired
     private EstudianteRepository estudianteRepository;
-
     @Autowired
     private CursoRepository cursoRepository;
 

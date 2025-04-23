@@ -74,7 +74,7 @@ public class MatriculaController {
 
     // Eliminar matrícula
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> eliminarMatricula(@PathVariable("id") Long id) {
+    public ResponseEntity<HttpStatus> eliminarMatricula(@PathVariable("id") Integer id) {
         try {
             boolean eliminado = matriculaService.eliminarMatricula(id);
             if (eliminado) {
