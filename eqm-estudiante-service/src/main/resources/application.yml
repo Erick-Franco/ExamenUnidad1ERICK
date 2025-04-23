@@ -1,8 +1,7 @@
 spring:
   application:
     name: eqm-estudiante-service
+  profiles:
+    active: development
   config:
     import: optional:configserver:http://root:123456@localhost:7071
-  profiles:
-    active: dev  # o development si prefieres
-
