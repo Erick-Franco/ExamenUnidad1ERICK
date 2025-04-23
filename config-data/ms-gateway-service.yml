@@ -17,17 +17,17 @@ spring:
         locator:
           enable: true
       routes:
-        - id: ms-curso-service
-          uri: lb://ms-curso-service
+        - id: eqm-curso-service
+          uri: lb://eqm-curso-service
           predicates:
             - Path=/cursos/**
 
-        - id: ms-estudiante-service
-          uri: lb://ms-estudiante-service
+        - id: eqm-estudiante-service
+          uri: lb://eqm-estudiante-service
           predicates:
             - Path=/estudiantes/**
 
-        - id: mms-matricula-service
-          uri: lb://ms-matricula-service
+        - id: ms-matricula-service
+          uri: lb://eqm-matricula-service
           predicates:
             - Path=/matriculas/**
