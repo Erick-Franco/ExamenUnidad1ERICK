@@ -1,7 +1,7 @@
 server:
   port: 8083
-  profiles:
-    active: dev
+  profiles: development
+
 
 spring:
   datasource:
