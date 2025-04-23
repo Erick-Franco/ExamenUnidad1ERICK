@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CursoFeign {
 
     @GetMapping("/{id}")
-    public Curso getCursoById(@PathVariable("id") Integer id);
+    ResponseEntity<Curso> listById(@PathVariable("id") Integer id);
 }

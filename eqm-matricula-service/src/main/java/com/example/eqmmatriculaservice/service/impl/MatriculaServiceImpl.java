@@ -37,7 +37,7 @@ public class MatriculaServiceImpl implements MatriculaService {
     @Override
     public Matricula crearMatricula(Matricula matricula) throws Exception {
         // Obtener estudiante usando Feign Client
-        Estudiante estudiante = estudianteFeignClient.getEstudianteById(matricula.getEstudianteId());
+        Estudiante estudiante = estudianteFeignClient.listById(matricula.getEstudianteId()).getBody();
         if (estudiante == null) {
             throw new Exception("Estudiante no encontrado");
         }
@@ -48,7 +48,7 @@ public class MatriculaServiceImpl implements MatriculaService {
         }
 
         // Obtener curso usando Feign Client
-        Curso curso = cursoFeignClient.getCursoById(matricula.getCursoCodigo());
+        Curso curso = cursoFeignClient.listById(matricula.getCursoCodigo()).getBody();
         if (curso == null) {
             throw new Exception("Curso no encontrado");
         }
