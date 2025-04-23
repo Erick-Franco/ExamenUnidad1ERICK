@@ -63,8 +63,5 @@ public class CursoController {
         }
         return ResponseEntity.notFound().build();
     }
-    @GetMapping
-    public List<Curso> listarCursos() {
-        return cursoService.obtenerTodos();
-    }
+
 }
