@@ -1,13 +1,16 @@
 package com.example.eqmmatriculaservice.service.impl;
 
 
+
+
+
 import com.example.eqmcursoservice.entity.Curso;
-import com.example.eqmcursoservice.repository.CursoRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.eqmestudianteservice.entity.Estudiante;
-import com.example.eqmestudianteservice.repository.EstudianteRepository;
+import com.example.eqmmatriculaservice.dto.CursoDTO;
+import com.example.eqmmatriculaservice.dto.EstudianteDTO;
 import com.example.eqmmatriculaservice.entity.Matricula;
+import com.example.eqmmatriculaservice.feign.CursoFeign;
+import com.example.eqmmatriculaservice.feign.EstudianteFeign;
 import com.example.eqmmatriculaservice.repository.MatriculaRepository;
 import com.example.eqmmatriculaservice.service.MatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,40 +27,42 @@ public class MatriculaServiceImpl implements MatriculaService {
     private MatriculaRepository matriculaRepository;
 
     @Autowired
-    private EstudianteRepository estudianteRepository;
+    private EstudianteFeign estudianteFeignClient;
+
     @Autowired
-    private CursoRepository cursoRepository;
+    private CursoFeign cursoFeignClient;
+
 
     // Crear una nueva matrícula
     @Override
     public Matricula crearMatricula(Matricula matricula) throws Exception {
-        // Validación de que el estudiante exista y esté activo
-        Optional<Estudiante> estudianteOptional = estudianteRepository.findById(matricula.getEstudiante().getId());
-        if (!estudianteOptional.isPresent()) {
+        // Obtener estudiante usando Feign Client
+        Estudiante estudiante = estudianteFeignClient.getEstudianteById(matricula.getEstudianteId());
+        if (estudiante == null) {
             throw new Exception("Estudiante no encontrado");
         }
-        Estudiante estudiante = estudianteOptional.get();
 
-        // Verificar si el estado del estudiante es "ACTIVO"
-        if (estudiante.getEstado() == null || !estudiante.getEstado().equals("ACTIVO")) {
+        // Verificar si el estudiante está activo
+        if (!"ACTIVO".equals(estudiante.getEstado())) {
             throw new Exception("El estudiante no está activo");
         }
 
-        // Validación de que el curso exista y tenga capacidad disponible
-        Optional<Curso> cursoOptional = cursoRepository.findById(matricula.getCurso().getId());
-        if (!cursoOptional.isPresent()) {
+        // Obtener curso usando Feign Client
+        Curso curso = cursoFeignClient.getCursoById(matricula.getCursoCodigo());
+        if (curso == null) {
             throw new Exception("Curso no encontrado");
         }
-        Curso curso = cursoOptional.get();
 
-        // Verificar si el curso tiene capacidad disponible
+        // Verificar la capacidad del curso
         if (curso.getCapacidad() == null || curso.getCapacidad() <= 0) {
             throw new Exception("El curso no tiene capacidad disponible");
         }
 
-        // Crear la matrícula
+        // Crear y guardar la matrícula
         return matriculaRepository.save(matricula);
     }
+
+
 
     // Obtener todas las matrículas
     @Override

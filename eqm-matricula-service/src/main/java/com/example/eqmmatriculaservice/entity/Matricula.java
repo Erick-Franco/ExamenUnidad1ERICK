@@ -1,5 +1,7 @@
 package com.example.eqmmatriculaservice.entity;
 
+import com.example.eqmcursoservice.entity.Curso;
+import com.example.eqmmatriculaservice.dto.CursoDTO;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -71,4 +73,6 @@ public class Matricula {
     public void setCiclo(String ciclo) {
         this.ciclo = ciclo;
     }
+
+
 }
