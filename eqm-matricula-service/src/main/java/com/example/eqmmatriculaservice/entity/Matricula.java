@@ -1,8 +1,5 @@
 package com.example.eqmmatriculaservice.entity;
 
-
-import com.example.eqmcursoservice.entity.Curso;
-import com.example.eqmestudianteservice.entity.Estudiante;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -13,13 +10,11 @@ public class Matricula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "estudiante_id", nullable = false)
-    private Estudiante estudiante;
+    @Column(nullable = false)
+    private Integer estudianteId;
 
-    @ManyToOne
-    @JoinColumn(name = "curso_codigo", nullable = false)
-    private Curso curso;
+    @Column(nullable = false)
+    private Integer cursoCodigo;
 
     @Column(nullable = false)
     private LocalDate fechaMatricula;
@@ -27,13 +22,12 @@ public class Matricula {
     @Column(nullable = false)
     private String ciclo;
 
-    public Matricula() {
-    }
+    public Matricula() {}
 
-    public Matricula(Integer id, Estudiante estudiante, Curso curso, LocalDate fechaMatricula, String ciclo) {
+    public Matricula(Integer id, Integer estudianteId, Integer cursoCodigo, LocalDate fechaMatricula, String ciclo) {
         this.id = id;
-        this.estudiante = estudiante;
-        this.curso = curso;
+        this.estudianteId = estudianteId;
+        this.cursoCodigo = cursoCodigo;
         this.fechaMatricula = fechaMatricula;
         this.ciclo = ciclo;
     }
@@ -46,20 +40,20 @@ public class Matricula {
         this.id = id;
     }
 
-    public Estudiante getEstudiante() {
-        return estudiante;
+    public Integer getEstudianteId() {
+        return estudianteId;
     }
 
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
+    public void setEstudianteId(Integer estudianteId) {
+        this.estudianteId = estudianteId;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public Integer getCursoCodigo() {
+        return cursoCodigo;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setCursoCodigo(Integer cursoCodigo) {
+        this.cursoCodigo = cursoCodigo;
     }
 
     public LocalDate getFechaMatricula() {
