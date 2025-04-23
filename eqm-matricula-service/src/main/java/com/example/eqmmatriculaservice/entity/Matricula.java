@@ -2,6 +2,7 @@ package com.example.eqmmatriculaservice.entity;
 
 import com.example.eqmcursoservice.entity.Curso;
 import com.example.eqmmatriculaservice.dto.CursoDTO;
+import com.example.eqmmatriculaservice.dto.EstudianteDTO;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -23,6 +24,32 @@ public class Matricula {
 
     @Column(nullable = false)
     private String ciclo;
+
+    @Transient
+    private CursoDTO curso;
+
+    @Transient
+    private EstudianteDTO estudiante;
+
+// Getters y setters para curso y estudiante
+
+
+    public CursoDTO getCurso() {
+        return curso;
+    }
+
+    public void setCurso(CursoDTO curso) {
+        this.curso = curso;
+    }
+
+    public EstudianteDTO getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(EstudianteDTO estudiante) {
+        this.estudiante = estudiante;
+    }
+
 
     public Matricula() {}
 

@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@FeignClient(name = "eqm-curso-service", path = "/cursos")
+@FeignClient(name = "curso-service")
 public interface CursoFeign {
 
-    @GetMapping("/{id}")
-    ResponseEntity<Curso> listById(@PathVariable("id") Integer id);
+    @GetMapping("/cursos/{id}")
+    ResponseEntity<CursoDTO> obtenerCursoPorId(@PathVariable("id") Integer id);
 }
+
+

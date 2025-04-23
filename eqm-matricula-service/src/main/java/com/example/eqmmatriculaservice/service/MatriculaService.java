@@ -3,6 +3,7 @@ package com.example.eqmmatriculaservice.service;
 import com.example.eqmmatriculaservice.entity.Matricula;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MatriculaService {
 
@@ -10,8 +11,7 @@ public interface MatriculaService {
 
     List<Matricula> obtenerTodasLasMatriculas();
 
-    // Obtener matrícula por ID
-    Matricula obtenerMatriculaPorId(Integer id);
+    Optional<Matricula> obtenerMatriculaPorId(Integer id);
 
     // Actualizar matrícula
     Matricula actualizarMatricula(Integer id, Matricula matricula);

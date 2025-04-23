@@ -37,7 +37,7 @@ public class MatriculaServiceImpl implements MatriculaService {
     @Override
     public Matricula crearMatricula(Matricula matricula) throws Exception {
         // Obtener estudiante usando Feign Client
-        Estudiante estudiante = estudianteFeignClient.listById(matricula.getEstudianteId()).getBody();
+        EstudianteDTO estudiante = estudianteFeignClient.obtenerEstudiantePorId(matricula.getEstudianteId()).getBody();
         if (estudiante == null) {
             throw new Exception("Estudiante no encontrado");
         }
@@ -48,7 +48,7 @@ public class MatriculaServiceImpl implements MatriculaService {
         }
 
         // Obtener curso usando Feign Client
-        Curso curso = cursoFeignClient.listById(matricula.getCursoCodigo()).getBody();
+        CursoDTO curso = cursoFeignClient.obtenerCursoPorId(matricula.getCursoCodigo()).getBody();
         if (curso == null) {
             throw new Exception("Curso no encontrado");
         }
@@ -71,11 +71,11 @@ public class MatriculaServiceImpl implements MatriculaService {
     }
 
     // Obtener matrícula por ID
-    @Override
+    /*@Override
     public Matricula obtenerMatriculaPorId(Integer id) {
         Optional<Matricula> matriculaOptional = matriculaRepository.findById(id);
         return matriculaOptional.orElse(null); // Retorna null si no se encuentra la matrícula
-    }
+    }*/
 
     // Actualizar matrícula
     @Override
@@ -96,4 +96,20 @@ public class MatriculaServiceImpl implements MatriculaService {
         }
         return false; // Retorna false si no se encuentra la matrícula
     }
+
+    @Override
+    public Optional<Matricula> obtenerMatriculaPorId(Integer id) {
+        Matricula matricula = matriculaRepository.findById(id).orElse(null);
+        if (matricula == null) return Optional.empty();
+
+        CursoDTO curso = cursoFeignClient.obtenerCursoPorId(matricula.getCursoCodigo()).getBody();
+        EstudianteDTO estudiante = estudianteFeignClient.obtenerEstudiantePorId(matricula.getEstudianteId()).getBody();
+
+        matricula.setCurso(curso);
+        matricula.setEstudiante(estudiante);
+
+        return Optional.of(matricula);
+    }
+
+
 }
