@@ -48,11 +48,16 @@ public class MatriculaController {
     public ResponseEntity<Matricula> obtenerMatriculaPorId(@PathVariable("id") Integer id) {
         try {
             Optional<Matricula> matricula = matriculaService.obtenerMatriculaPorId(id);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            if (matricula.isPresent()) {
+                return new ResponseEntity<>(matricula.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     // Actualizar matrícula
     @PutMapping("/{id}")
