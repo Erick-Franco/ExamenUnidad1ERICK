@@ -43,21 +43,11 @@ public class Matricula {
 // Getters y setters para curso y estudiante
 
 
-    public CursoDTO getCurso() {
-        return curso;
-    }
+    public CursoDTO getCurso() { return curso; }
+    public void setCurso(CursoDTO curso) { this.curso = curso; }
 
-    public void setCurso(CursoDTO curso) {
-        this.curso = curso;
-    }
-
-    public EstudianteDTO getEstudiante() {
-        return estudiante;
-    }
-
-    public void setEstudiante(EstudianteDTO estudiante) {
-        this.estudiante = estudiante;
-    }
+    public EstudianteDTO getEstudiante() { return estudiante; }
+    public void setEstudiante(EstudianteDTO estudiante) { this.estudiante = estudiante; }
 
 
     public Matricula() {}
