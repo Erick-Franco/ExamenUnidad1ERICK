@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -64,7 +65,6 @@ public class MatriculaServiceImpl implements MatriculaService {
         // Crear y guardar la matrícula
         return matriculaRepository.save(matricula);
     }
-
 
 
     // Obtener todas las matrículas
@@ -115,19 +115,22 @@ public class MatriculaServiceImpl implements MatriculaService {
             matricula.setCurso(cursoResponse.getBody());
             matricula.setEstudiante(estudianteResponse.getBody());
 
+            System.out.println("Estudiante ID: " + matricula.getEstudianteId());
+            System.out.println("Curso Código: " + matricula.getCursoCodigo());
+            System.out.println("Estudiante: " + estudianteResponse.getBody());
+            System.out.println("Curso: " + cursoResponse.getBody());
+
+
         } catch (Exception e) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Error al obtener datos relacionados: " + e.getMessage()
-            );
+            throw new RuntimeException("Error al obtener datos relacionados: " + e.getMessage());
+
+
+
         }
 
 
-
         return Optional.of(matricula);
+
     }
-
-
-
 
 }

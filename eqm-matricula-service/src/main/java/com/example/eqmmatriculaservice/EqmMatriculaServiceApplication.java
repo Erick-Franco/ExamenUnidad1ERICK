@@ -12,6 +12,8 @@ public class EqmMatriculaServiceApplication {
 		SpringApplication.run(EqmMatriculaServiceApplication.class, args);
 		System.out.println("INICIADO CORRECTAMENTE");
 
+
+
 	}
 
 }
