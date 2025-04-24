@@ -3,8 +3,10 @@ package com.example.eqmmatriculaservice.entity;
 import com.example.eqmcursoservice.entity.Curso;
 import com.example.eqmmatriculaservice.dto.CursoDTO;
 import com.example.eqmmatriculaservice.dto.EstudianteDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Matricula {
@@ -30,6 +32,13 @@ public class Matricula {
 
     @Transient
     private EstudianteDTO estudiante;
+
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "curso_id")
+    private List<MatriculaCurso> detalle;
+
 
 // Getters y setters para curso y estudiante
 

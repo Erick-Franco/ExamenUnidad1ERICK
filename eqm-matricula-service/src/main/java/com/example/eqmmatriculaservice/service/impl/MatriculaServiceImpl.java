@@ -14,6 +14,7 @@ import com.example.eqmmatriculaservice.feign.EstudianteFeign;
 import com.example.eqmmatriculaservice.repository.MatriculaRepository;
 import com.example.eqmmatriculaservice.service.MatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -103,17 +104,22 @@ public class MatriculaServiceImpl implements MatriculaService {
         if (matricula == null) return Optional.empty();
 
         try {
-            CursoDTO curso = cursoFeignClient.obtenerCursoPorId(matricula.getCursoCodigo()).getBody();
-            EstudianteDTO estudiante = estudianteFeignClient.obtenerEstudiantePorId(matricula.getEstudianteId()).getBody();
+            ResponseEntity<CursoDTO> cursoResponse = cursoFeignClient.obtenerCursoPorId(matricula.getCursoCodigo());
+            ResponseEntity<EstudianteDTO> estudianteResponse = estudianteFeignClient.obtenerEstudiantePorId(matricula.getEstudianteId());
 
-            matricula.setCurso(curso);
-            matricula.setEstudiante(estudiante);
+            if (cursoResponse.getBody() == null) throw new Exception("Curso no encontrado");
+            if (estudianteResponse.getBody() == null) throw new Exception("Estudiante no encontrado");
+
+            matricula.setCurso(cursoResponse.getBody());
+            matricula.setEstudiante(estudianteResponse.getBody());
+
         } catch (Exception e) {
-            throw new RuntimeException("Error al obtener curso o estudiante: " + e.getMessage());
+            throw new RuntimeException("Error al obtener datos relacionados: " + e.getMessage());
         }
 
         return Optional.of(matricula);
     }
+
 
 
 
