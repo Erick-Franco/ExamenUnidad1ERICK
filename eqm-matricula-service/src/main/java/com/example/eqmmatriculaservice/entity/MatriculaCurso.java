@@ -9,12 +9,12 @@ public class MatriculaCurso {
     private Integer id;
 
     @Column(name = "curso_id")
-    private Long cursoId;
+    private Integer cursoId;
 
     public MatriculaCurso() {
     }
 
-    public MatriculaCurso(Integer id, Long cursoId) {
+    public MatriculaCurso(Integer id, Integer cursoId) {
         this.id = id;
         this.cursoId = cursoId;
     }
@@ -27,11 +27,11 @@ public class MatriculaCurso {
         this.id = id;
     }
 
-    public Long getCursoId() {
+    public Integer getCursoId() {
         return cursoId;
     }
 
-    public void setCursoId(Long cursoId) {
+    public void setCursoId(Integer cursoId) {
         this.cursoId = cursoId;
     }
 }

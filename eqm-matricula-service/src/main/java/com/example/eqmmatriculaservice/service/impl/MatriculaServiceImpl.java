@@ -102,14 +102,19 @@ public class MatriculaServiceImpl implements MatriculaService {
         Matricula matricula = matriculaRepository.findById(id).orElse(null);
         if (matricula == null) return Optional.empty();
 
-        CursoDTO curso = cursoFeignClient.obtenerCursoPorId(matricula.getCursoCodigo()).getBody();
-        EstudianteDTO estudiante = estudianteFeignClient.obtenerEstudiantePorId(matricula.getEstudianteId()).getBody();
+        try {
+            CursoDTO curso = cursoFeignClient.obtenerCursoPorId(matricula.getCursoCodigo()).getBody();
+            EstudianteDTO estudiante = estudianteFeignClient.obtenerEstudiantePorId(matricula.getEstudianteId()).getBody();
 
-        matricula.setCurso(curso);
-        matricula.setEstudiante(estudiante);
+            matricula.setCurso(curso);
+            matricula.setEstudiante(estudiante);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener curso o estudiante: " + e.getMessage());
+        }
 
         return Optional.of(matricula);
     }
+
 
 
 }
