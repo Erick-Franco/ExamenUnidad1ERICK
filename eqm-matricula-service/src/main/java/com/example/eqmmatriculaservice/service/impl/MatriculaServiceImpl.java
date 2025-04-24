@@ -14,8 +14,10 @@ import com.example.eqmmatriculaservice.feign.EstudianteFeign;
 import com.example.eqmmatriculaservice.repository.MatriculaRepository;
 import com.example.eqmmatriculaservice.service.MatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -114,8 +116,13 @@ public class MatriculaServiceImpl implements MatriculaService {
             matricula.setEstudiante(estudianteResponse.getBody());
 
         } catch (Exception e) {
-            throw new RuntimeException("Error al obtener datos relacionados: " + e.getMessage());
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Error al obtener datos relacionados: " + e.getMessage()
+            );
         }
+
+
 
         return Optional.of(matricula);
     }
