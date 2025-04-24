@@ -38,9 +38,18 @@ public class EstudianteSeeder implements CommandLineRunner {
             est3.setEstado("Activo");
             est3.setCicloActual(7);
 
+            Estudiante est4 = new Estudiante();
+            est3.setNombre("José Quispe");
+            est3.setCarrera("Ambiental");
+            est3.setDocumento("DNI45678948");
+            est3.setEstado("Activo");
+            est3.setCicloActual(2);
+
             estudianteRepository.save(est1);
             estudianteRepository.save(est2);
             estudianteRepository.save(est3);
+            estudianteRepository.save(est4);
+
 
             System.out.println("Datos de estudiantes insertados correctamente.");
         } else {
